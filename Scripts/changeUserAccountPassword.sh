@@ -1,7 +1,7 @@
 #!/bin/bash
 # Written by Heiko Horn 2018.06.14
 # This script will cange the password for the user speified in variables $4 and $5
-# variable $4 = user accout
+# variable $4 = user account
 # variable $5 = password
 
 userName="$4"
