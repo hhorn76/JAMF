@@ -1,6 +1,6 @@
 #!/bin/bash
 # Written by Heiko Horn 2012
-# This script sets a ntp time server
+# This script sets a ntp server
 
 # CHECK TO SEE IF A VALUE WAS PASSED IN PARAMETER 4 AND, IF SO, ASSIGN TO "timeServer"
 timeServer="${4}"
