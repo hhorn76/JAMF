@@ -1,15 +1,11 @@
 #!/bin/bash
 # Written by Heiko 2018.10.19
-# Check if a computer is currently on campus by pinging the domain controller
+# Get current user logged on
 
-# Get Active Director domain
-dnsDomain=$(dsconfigad -show | awk '/Active Directory Domain/{print $NF}' | sed 's/$$//')
-
-# Ping domain controller to
-if ping -c 2 -o $dnsDomain; then
-	result="TRUE"
+currentUser=$(ls -la /dev/console | cut -d " " -f 4)
+if [ -z $currentUser ]; then
+	echo "<result>No logins</result>"
 else
-	result="FALSE"
-fi      
-echo "<result>$result</result>"
+	echo "<result>$currentUser</result>"
+fi
 exit 0
