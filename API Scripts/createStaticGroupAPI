@@ -100,3 +100,4 @@ echo "Attempting to upload computers to group $jamfGroup"
 jamfGroupUrl="$jamfUrl/JSSResource/computergroups/id/$jamfGroup"
 jamfGroupUrl="${jamfGroupUrl// /%20}" 
 curl -sku $jamfUser:$jamfPass $jamfGroupUrl -X POST -HContent-type:application/xml --data "$groupXML"
+exit 0
