@@ -1,6 +1,6 @@
 #!/bin/bash
 # Written by Heiko Horn 2018.11.15
-# Check if Onedrive is currently active
+# Check if Onedrive is set to start at login
 MyResult=""
 fileName=""
 currentUser=$( /usr/bin/last -1 -t console | awk '{print $1}' )
