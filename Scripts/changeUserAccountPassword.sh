@@ -4,14 +4,14 @@
 # variable $4 = user account
 # variable $5 = password
 
-userName="$4"
-newPassword="$5"
+userName="${4}"
+newPassword="${5}"
 ARRAY=($(/usr/bin/dscl . -list Users))
 for i in "${ARRAY[@]}"
 do	
 	if [[ "$i" == "$userName" ]] ; then
-		echo "Changing password for: $userName"
-		/usr/bin/dscl . -passwd /Users/support "$newPassword"
+		echo "Changing password for user: $userName"
+		/usr/bin/dscl . -passwd /Users/$userName "${newPassword}"
 	fi
 done
 exit 0
