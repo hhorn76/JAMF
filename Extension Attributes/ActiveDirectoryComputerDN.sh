@@ -1,5 +1,5 @@
 #!/bin/bash
-# Written by Heiko 2018.10.19
+# Written by Heiko Horn 2018.10.19
 # Gets the current distinguished name for a computer in active directory
 
 #Get computername and domain name
