@@ -15,7 +15,7 @@ userName='mynewuser'
 jamfUser=''
 jamfPass=''
 
-#Create a authorization token for UAPI
+#Create an authorization token for UAPI
 getToken=$( curl -u $jamfUser:$jamfPass -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' "${jamfUrl}/uapi/auth/tokens" --silent )
 authToken=$( echo "${getToken}" | /usr/bin/python -c 'import json,sys; obj=json.load(sys.stdin); authToken=obj["token"];print authToken' )
 
