@@ -1,6 +1,6 @@
 #!/bin/bash
 # Written by Heiko Horn 2018.12.10
-# This script will check if a process is running at more than 50%, if found will stopp the process and remove any preferences  the password for the user speified in variables $4 and $5
+# This script will check if a process is running at more than 50%, if found will stopp the process and remove any preferences.
 
 processName="parentalcontrolsd"
 processDisplayName="ParentalControls"
