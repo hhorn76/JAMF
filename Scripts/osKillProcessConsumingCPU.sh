@@ -3,7 +3,7 @@
 # This script will check if a process is running at more than 50%, if found will stopp the process and remove any preferences.
 
 processName="parentalcontrolsd"
-processDisplayName="ParentalControls" #Name for Error/Status messages.
+processDisplayName=$processName #Name for Error/Status messages.
 processUsage=$(ps ax -o %cpu,command -A | grep -v grep | grep $processName | awk '{print $1}')
 processPreferences=/Library/Application\ Support/Apple/ParentalControls 
 
