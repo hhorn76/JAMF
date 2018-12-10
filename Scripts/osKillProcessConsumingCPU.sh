@@ -20,4 +20,3 @@ if [ ${processUsage} ]; then
 else
 	echo "$processDisplayName process not found."
 fi
-
