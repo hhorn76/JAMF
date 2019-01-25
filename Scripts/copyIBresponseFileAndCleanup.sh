@@ -4,7 +4,14 @@
 #Set variables for script
 #Please cursomize these values these values
 if [ -z "$4" ]; then
-	schoolYear='2018-2019'
+	#Calculate current school year
+	intYear=$(date +%Y)
+	intMonth=$(date +%m) 
+	if [ $intMonth -lt 7 ]; then
+		schoolYear="$((intYear - 1))-$intYear"
+	else
+		schoolYear="$intYear-$((intYear + 1))"
+	fi
 else
 	schoolYear="$4"
 fi
@@ -126,11 +133,17 @@ echo ''
 #unmount network volume
 echo "Unmounting network share: $strMount"
 umount $strMount*
-if [ -z "$(ls -A $strMount)" ]; then
-	rm -r $strMount
-else
-	echo "The mounted folder $strMount was not empty, will not delete it..."
-	error "The mounted folder $strMount was not empty, will not delete it..."
+if [ "$?" = "0" ]; then
+	if [ -z "$(ls -A $strMount)" ]; then
+			rm -r $strMount
+	else
+			echo "The mounted folder $strMount was not empty, will not delete it..."
+			error "The mounted folder $strMount was not empty, will not delete it..."
+	fi
+	echo "Could not unmount folder: $strMount"
 fi
 
 error "The process has finished successfully!" "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/FavoriteItemsIcon.icns"
+
+# enable bluetooth
+defaults write /Library/Preferences/com.apple.Bluetooth.plist ControllerPowerState -bool yes && kill -HUP $(ps ax | grep blue | grep -v grep | awk '{print$1}')
