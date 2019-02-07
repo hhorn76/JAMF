@@ -1,6 +1,7 @@
-!#/bin/bash
+#!/bin/bash
 # Written by Heiko 2018.11.15
 # Gets the horizontal screen resolution
 
-echo "<result>$(system_profiler SPDisplaysDataType | awk '/Resolution/{print $2}')</result>"
+strResulution=$(/usr/bin/python -c 'from AppKit import NSScreen; print str ( int (NSScreen.mainScreen().frame().size.width ) )')
+echo "<result>$strResulution</result>"
 exit 0
