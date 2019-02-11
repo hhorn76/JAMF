@@ -5,8 +5,8 @@ logFile="/var/log/jamf.log"
 IFS=$'\n'
 
 ARRAY=()
-ARRAY+=("Rename" "renameMac" "RenameMac")
-ARRAY+=("BindAD" "rebindAD" "BindAD")
+ARRAY+=("Rename":"renameMac":"RenameMac")
+ARRAY+=("BindAD":"rebindAD":"BindAD")
 ARRAY+=('Printers':'installPrinters':'Printers')
 ARRAY+=('Sophos Antivirus':'installSophosHTTPS':'SophosEnterprise')
 ARRAY+=('Google Chrome':'installGoogleChrome':'')
