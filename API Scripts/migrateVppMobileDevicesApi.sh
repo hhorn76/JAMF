@@ -21,7 +21,17 @@ intVpp=$( curl -sk -H "authorization: Basic ${strAuth}" -H 'Accept: application/
 if [ ${intVpp} -eq 1 ]; then
 echo -n Updating application ID: ${app}
 # set the new vpp_admin_account_id with the specified xml string
-curl -sk -H "authorization: Basic ${strAuth}" "${jamfUrl}/JSSResource/mobiledeviceapplications/id/${app}" -X PUT -H Content-type:application/xml --data $strXml
+strError=$( curl -sk -H "authorization: Basic ${strAuth}" "${jamfUrl}/JSSResource/mobiledeviceapplications/id/${app}" -X PUT -H Content-type:application/xml --data $strXml | grep Error )
 echo ''
+if [[ -z ${strError} ]]; then
+echo "Successfully updated application with id: ${app}"
+intCount=$(( intCount + 1 ))
+else
+echo ${strError} | sed -e 's/<[^>]*>//g'
+intCountError=$(( intCountError + 1 ))
+fi
 fi
 done
+
+echo "Applications with errors: ${intCountError}"
+echo "Applications successfully updated: ${intCount}"
