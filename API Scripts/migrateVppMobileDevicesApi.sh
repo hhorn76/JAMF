@@ -31,6 +31,7 @@ echo ${strError} | sed -e 's/<[^>]*>//g'
 intCountError=$(( intCountError + 1 ))
 fi
 fi
+echo ''
 done
 
 echo "Applications with errors: ${intCountError}"
