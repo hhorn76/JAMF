@@ -32,10 +32,10 @@ echo "Successfully updated application with id: ${app}"
 intCount=$(( intCount + 1 ))
 else
 echo ${strError} | sed -e 's/<[^>]*>//g'
+echo ''
 intCountError=$(( intCountError + 1 ))
 fi
 fi
-echo ''
 done
 
 echo "Applications with errors: ${intCountError}"
