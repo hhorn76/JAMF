@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# Written by Heiko Horn on 2018.03.06
+# This script get the vpp information for all mobile device applications in Jamf Pro using XML.
 
 import urllib2, base64, plistlib
 import xml.etree.ElementTree as ET
