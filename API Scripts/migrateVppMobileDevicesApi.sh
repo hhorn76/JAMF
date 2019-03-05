@@ -4,6 +4,7 @@
 
 # API service account credentials
 jamfUrl=$( defaults read /Library/Preferences/com.jamfsoftware.jamf.plist jss_url ) 
+
 # Base64 encoded username and password
 # echo apiuser:password | base64
 strAuth=''
