@@ -1,5 +1,4 @@
 #!/bin/bash
-ls
 currentUser=$( /usr/bin/last -1 -t console | awk '{print $1}' )
 logFile="/var/log/jamf.log"
 IFS=$'\n'
