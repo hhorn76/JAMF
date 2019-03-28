@@ -6,7 +6,9 @@ IFS=$'\n'
 PLISTBUDDY=/usr/libexec/PlistBuddy
 
 # add multiple plists to modify to this array 
-arrPlist=("/Users/support/Library/Preferences/com.apple.dock.plist" "/System/Library/User\ Template/English.lproj/Library/Preferences/com.apple.dock.plist")
+arrPlist=()
+arrPlist+=("/Users/support/Library/Preferences/com.apple.dock.plist")
+arrPlist+=("/System/Library/User\ Template/English.lproj/Library/Preferences/com.apple.dock.plist")
 
 # Add items to the array: 1) File location 2) Application Name 3) Bundel identifier
 arrayApps=()
@@ -21,8 +23,9 @@ function addDockItem {
 	echo "Application Name: ${3}"
 	echo "Bundel identifier: ${4}"
 	if [ ${1} == 0 ]; then
-		${PLISTBUDDY} -c "add persistent-apps:${1} dict " ${PLIST}
+		${PLISTBUDDY} -c "add persistent-apps array" ${PLIST}
 	fi
+	${PLISTBUDDY} -c "add persistent-apps:${1} dict " ${PLIST}
 	${PLISTBUDDY} -c "add persistent-apps:${1}:tile-data dict" ${PLIST}
 	${PLISTBUDDY} -c "add persistent-apps:${1}:tile-data:file-data dict" ${PLIST}
 	${PLISTBUDDY} -c "add persistent-apps:${1}:tile-data:file-data:_CFURLString string ${2}" ${PLIST}
@@ -39,6 +42,7 @@ function addDockItem {
 for PLIST in ${arrPlist[@]}; do
 	echo "Current PLIST: ${PLIST}"
 	if [ -f ${PLIST} ]; then
+		echo "Creating plist"
 		touch ${PLIST} 
 		chmod 600 ${PLIST}
 	fi
@@ -55,6 +59,5 @@ for PLIST in ${arrPlist[@]}; do
 	done
 	chmod 600 ${PLIST}
 done
-killall cfprefsd
-killall Dock
+$(killall cfprefsd) && $(killall Dock)
 IFS=${IFS_old}
