@@ -24,12 +24,13 @@ appList = []
 appList.append(objApp("Rename", "renameMac", "RenameMac"))
 appList.append(objApp("BindAD", "rebindAD", "BindAD"))
 appList.append(objApp("Printers", "installPrinters", "Printers"))
-appList.append(objApp("Sophos Antivirus", "InstallSophosHTTPS", "SophosEnterprise"))
+appList.append(objApp("Sophos Antivirus", "installSophos", "SophosEnterprise"))
+appList.append(objApp("LightSpeed User Agent", "lightspeed", "LightSpeedUserAgent"))
 appList.append(objApp("Google Chrome", "installGoogleChrome", "GoogleChrome"))
 appList.append(objApp("VLC media player", "installVLC", "vlc"))
 appList.append(objApp("Microsoft Skype","installSkype", "Skype"))
 appList.append(objApp("Microsoft OneDrive", "installOneDrive", "OneDrive"))
-appList.append(objApp("Microsoft Office", "installOffice", "Microsoft_Office"))
+appList.append(objApp("User Environment", "userEnvironment", "UserEnvironment"))
 appList.append(objApp("Apple Software Updates", "updateOS", "OSUpdate"))
 	
 #define functions
@@ -77,6 +78,9 @@ currentUser = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]
 currentUser = [currentUser,""][currentUser in [u"loginwindow", None, u""]]
 print('Current user: '+currentUser)
 print('')
+
+#Prevent the system from sleeping on behalf of a utility
+subprocess.call('/usr/bin/caffeinate -i -s -d -t 18000 &', shell=True)
 
 #for each class object in list execute jamf event
 for i in appList:
@@ -128,7 +132,7 @@ print ''
 processList = []
 #processList.append('pkgutil --forget "io.fti.SplashBuddy.Installer')
 processList.append('launchctl unload /Library/LaunchAgents/io.fti.SplashBuddy.launch.plist')
-processList.append('rm -rf /Library/Application Support/SplashBuddy')
+processList.append('rm -rf /Library/Application\ Support/SplashBuddy')
 
 for strProcess in processList:
 	print "Executing command: "+ strProcess
