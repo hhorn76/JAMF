@@ -47,7 +47,8 @@ function createPlist {
 	FOLDER="${PLIST/\/Bookmarks.plist/}"
 	if [ ! -d "${FOLDER}" ]; then
 		echo 'Creating Safari preferences folder.'
-		$(/bin/mkdir "${FOLDER}")
+		/bin/mkdir "${FOLDER}"
+        /usr/bin/xattr -r -d com.apple.quarantine "${FOLDER}"
 	fi
 	echo "Creating plist: $PLIST"
 	#$(/usr/bin/touch "${PLIST}")
