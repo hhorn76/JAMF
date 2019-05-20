@@ -8,6 +8,8 @@ strPassword="$5"
 strFileServer="$6"
 strShare="$7"
 
+IFS=$'\n'
+
 ########################################
 #Calculate current school year
 intYear=$(date +%Y)
