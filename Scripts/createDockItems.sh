@@ -39,6 +39,16 @@ function addDockItem {
 	echo ''
 }
 
+# Wait for the dock process to load, before changing it.
+dockStatus=$(pgrep -x Dock)
+while [ "$dockStatus" == "" ]; do
+	echo 'Waiting for Dock to load'
+	sleep 2
+	dockStatus=$(pgrep -x Dock)
+done
+echo 'Dock has finished loading, starting to write plist.'
+
+# Create the dock items from the array
 for PLIST in ${arrPlist[@]}; do
 	echo "Current PLIST: ${PLIST}"
 	if [ -f ${PLIST} ]; then
