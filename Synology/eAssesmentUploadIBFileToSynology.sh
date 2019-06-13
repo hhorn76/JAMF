@@ -8,6 +8,7 @@ strPassword="$5"
 strFileServer="$6"
 strShare="$7"
 
+#Set the Internal Field Separator to handle space characters
 IFS=$'\n'
 
 ########################################
