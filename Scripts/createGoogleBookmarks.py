@@ -40,17 +40,21 @@ Google,https://google.com
 print ('')
 i=0
 try:
-	strUser = sys.argv[4]
-	print ('User: ' + strUser)
-	strFile='/Users/' + strUser + '/Library/Application Support/Google/Chrome/Default/Bookmarks'
-	uid = pwd.getpwnam(strUser).pw_uid
+	if len(sys.argv[4]) > 1:
+		strUser = sys.argv[4]
+		print ('User: ' + strUser)
+		strFile='/Users/' + strUser + '/Library/Application Support/Google/Chrome/Default/Bookmarks'
+		uid = pwd.getpwnam(strUser).pw_uid
+	else:
+		currentUser = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]
+		currentUser = [currentUser,""][currentUser in [u"loginwindow", None, u""]]
+		print ('Current user: ' + currentUser)
+		strFile='/Users/' + currentUser + '/Library/Application Support/Google/Chrome/Default/Bookmarks'
+		uid = pwd.getpwnam(currentUser).pw_uid
 except IndexError:
-	currentUser = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]
-	currentUser = [currentUser,""][currentUser in [u"loginwindow", None, u""]]
-	print ('Current user: ' + currentUser)
-	strFile='/Users/' + currentUser + '/Library/Application Support/Google/Chrome/Default/Bookmarks'
-	uid = pwd.getpwnam(currentUser).pw_uid
+	print('Error with processig argument.')
 
+print (strFile)
 gid = grp.getgrnam('staff').gr_gid
 
 ####################################################################################
@@ -139,7 +143,8 @@ if os.path.exists(strFile):
 	os.remove(strFile) 
 else:
 	print ('Creating Bookmarks folders.')
-	os.makedirs(strFile.replace('/Bookmarks', ''))
+	if not os.path.exists(strFile.replace('/Bookmarks', '')):
+		os.makedirs(strFile.replace('/Bookmarks', ''))
 	os.chown(strFile.replace('Default/Bookmarks', ''), uid, gid)
 	os.chown(strFile.replace('Chrome/Default/Bookmarks', ''), uid, gid)
 
