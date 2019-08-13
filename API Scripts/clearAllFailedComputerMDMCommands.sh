@@ -43,9 +43,9 @@ for id in "${ids[@]}"; do
 		strFailed=$(echo $xmlresult | xmllint -xpath /failed/command/status - | /usr/bin/grep "VPP")
 		if [ ! -z "${strFailed}" ]; then
 			/bin/echo "Removing failed MDM commands ..."	
-			#clearFailedMdmCommands
+			clearFailedMdmCommands
 			/bin/echo "Sending blank push notification ..."		
-			#sendBlankPush
+			sendBlankPush
 			((intCount+=1))
 			getComputerName
 			arrFailed+=(${name})
