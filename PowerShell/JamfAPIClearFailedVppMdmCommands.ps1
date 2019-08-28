@@ -42,9 +42,9 @@ foreach ($item in $objJamf.computers.computer) {
         Write-Host "$($item.name) has failed commands."
         if ( ($objCommand.status).ForEach({$_.Contains('VPP')}) -eq $true ) {
             Write-Host "Removing failed MDM commands ..." -ForegroundColor Yellow
-            #$objMDM=clearFailedMdmCommands $id
+            $objMDM=clearFailedMdmCommands $id
             Write-Host "Sending blank push notification ..." -ForegroundColor Yellow
-            #$objPush=sendBlankPush $id
+            $objPush=sendBlankPush $id
             $arrFailed+=$item
             $intCount+=1
             Write-Host "Computer name: $($item.name)" -ForegroundColor Yellow
