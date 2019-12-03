@@ -25,7 +25,7 @@ function installApp {
 	/usr/local/bin/jamf policy -forceNoRecon -event $2
 	if [ ! $? -eq 0 ]; then
 		echo -e "ERROR: installation failed for ${app} with trigger ${trigger}\n"
-        EXIT=1
+        	EXIT=1
 		continue
 	fi
 }
@@ -33,11 +33,10 @@ function installApp {
 # When executing this script at login, we are just making sure that the jamf binaries have been installed before starting.
 echo 'Waiting for jamf binaries to get installed...'
 i=0 # initialize intger
-while [ ! -f /usr/local/bin/jamf ]
-do
+while [ ! -f /usr/local/bin/jamf ]; do
 	echo 'Jamf Pro banaries are not installed yet, waiting (i)'
 	sleep 1
-    ((i+=1)) # adding one to intger
+	((i+=1)) # adding one to intger
 done
 
 # Starting enroll process by calling triggers specified in the array above.
