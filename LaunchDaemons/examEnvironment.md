@@ -1,5 +1,7 @@
+<h2>How to create a LaunchDaemon to call a Jamf Pro event trigger</h2>
+
 These compontnets will create a System LaunchDaemon that will execute a Jamf Pro policy event trigger at startup.
-We use this to move and backup any files found on the Desktop and Documents folders.
+We use this to move and backup any files found on the Desktop and Documents folders of our exam computers.
 
 1.  Create the Script backupDesktopAndDocuments.sh in Jamf Pro.
 2.  Create a policy that will execute a script with an event trigger of backupDesktop
