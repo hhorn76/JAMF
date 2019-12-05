@@ -30,7 +30,7 @@ function createFolder {
 		echo "Creating directory: ${BACKUP}"
 		/bin/mkdir ${BACKUP}
 		echo "Changing folder permission on directory: ${BACKUP}"
-		/usr/sbin/chown support ${BACKUP}
+		/usr/sbin/chown ${5} ${BACKUP}
 	fi 
 	if [ ! -d "${BACKUP_DATE}" ]; then
 		echo "Creating directory: ${BACKUP_DATE}"
@@ -56,7 +56,7 @@ for FOLDER in "${FOLDERS[@]}"; do
 		for ITEM in ${ARRAY[@]}; do
 			echo "Moving direcroty ${ITEM} to ${BACKUP_DATE}"
 			/bin/mv ${ITEM} ${BACKUP_DATE}
-			/usr/sbin/chown ${5} ${BACKUP}
+			/usr/sbin/chown -Rf ${5} ${BACKUP}
 		done
 	fi
 done
