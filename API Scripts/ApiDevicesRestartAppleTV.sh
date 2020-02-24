@@ -8,8 +8,8 @@ jamfUrl=$( defaults read /Library/Preferences/com.jamfsoftware.jamf.plist jss_ur
 # strAuth=$(echo apiuser:password | base64)
 strAuth=''
 
-function getAllComputers () {
-	/usr/bin/curl -sk -H "authorization: Basic ${strAuth}" -H 'Accept: application/xml' "${jamfUrl}/JSSResource/mobiledevices" -X GET -H "accept: application/xml" #| xmllint --format - | awk -F'>|<' '/<mobile_device>/{print $3}' | sort -n
+function getAllDevices () {
+	/usr/bin/curl -sk -H "authorization: Basic ${strAuth}" -H 'Accept: application/xml' "${jamfUrl}/JSSResource/mobiledevices" -X GET -H "accept: application/xml"
 }
 
 function restartDevice () {
@@ -17,9 +17,9 @@ function restartDevice () {
 }
 
 # Get all mobile devices from Jamf
-strXml=$(getAllComputers)
+strXml=$(getAllDevices)
 
-#Create arrays for Id's, Names and Models
+# Create arrays for Id's, Names and Models
 arrModel=( $(echo ${strXml} | xmllint --format - | awk -F'>|<' '/<model_identifier>/{print $3}') )
 arrId=( $(echo ${strXml} | xmllint --format - | awk -F'>|<' '/<id>/{print $3}') )
 strName=$(echo -en ${strXml} | xmllint --format - | awk -F'>|<' '/<name>/{print $3}')
