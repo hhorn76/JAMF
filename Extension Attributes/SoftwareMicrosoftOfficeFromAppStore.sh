@@ -11,7 +11,7 @@
 # NOT INSTALLED means that none of the apps are present
 
 # Create an array list of applications to check
-MYAPPS=("Outlook" "Excel" "Outlook" "PowerPoint" "OneNote" "Remote Desktop") # "Teams")
+MYAPPS=("Word" "Excel" "Outlook" "PowerPoint" "OneNote" "Remote Desktop") # "Teams")
 ALLAPPSTORE='YES'
 for APP in "${MYAPPS[@]}"; do
 	# Check if Application is installed
