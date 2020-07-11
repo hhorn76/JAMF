@@ -12,3 +12,5 @@ echo 'Add everyone to group access _lpadmin'
 /usr/sbin/dseditgroup -o edit -n /Local/Default -a everyone -t group _lpadmin
 
 exit 0
+
+
