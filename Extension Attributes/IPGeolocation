@@ -1,0 +1,17 @@
+#!/bin/sh
+
+IP=$(curl -s https://api.ipify.org)
+
+DATA=$(curl -s "http://ip-api.com/json/${IP}")
+
+status=$(osascript -l JavaScript -e "JSON.parse('${DATA}').status")
+country=$(osascript -l JavaScript -e "JSON.parse('${DATA}').country")
+city=$(osascript -l JavaScript -e "JSON.parse('${DATA}').city")
+org=$(osascript -l JavaScript -e "JSON.parse('${DATA}').org")
+regionName=$(osascript -l JavaScript -e "JSON.parse('${DATA}').regionName")
+if [[ "${status}" == "success" ]]
+then
+    echo "<result>${org}, ${city}, ${regionName}, ${country}</result>"
+else
+    echo "<result></result>"
+fi
